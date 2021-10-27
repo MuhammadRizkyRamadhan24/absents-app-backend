@@ -58,6 +58,7 @@ exports.getDailyByQuery = (req, res) => {
         req.query.month === "" &&
         req.query.date === ""
       ) {
+        console.log('hehe');
         let newDate = new Date();
         let autoMonth =
           newDate.getMonth() + 1 < 10
