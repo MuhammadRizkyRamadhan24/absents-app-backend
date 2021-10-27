@@ -35,31 +35,32 @@ exports.getDailyByQuery = (req, res) => {
       req.query.date2 !== ""
     ) {
       console.log(req.query);
-    }
-    const { year1, year2, month1, month2, date1, date2 } = req.query;
-    getDailyByDateRange(
-      limit,
-      page,
-      year1,
-      month1,
-      year2,
-      month2,
-      date1,
-      date2,
-      (err, results) => {
-        if (!err) {
-          return standardResponse(
-            res,
-            200,
-            true,
-            "Results daily reports",
-            results
-          );
-        } else {
-          return standardResponse(res, 400, false, "An error occured");
+    } else {
+      const { year1, year2, month1, month2, date1, date2 } = req.query;
+      getDailyByDateRange(
+        limit,
+        page,
+        year1,
+        month1,
+        year2,
+        month2,
+        date1,
+        date2,
+        (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured");
+          }
         }
-      }
-    );
+      );
+    }
   } else {
     if (
       req.query.year !== undefined &&
