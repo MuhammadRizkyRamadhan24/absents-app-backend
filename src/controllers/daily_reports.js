@@ -27,32 +27,133 @@ exports.getDailyByQuery = (req, res) => {
     req.query.date2 !== undefined
   ) {
     console.log(req.query, "atas");
-    const { year1, year2, month1, month2, date1, date2 } = req.query;
-    getDailyByDateRange(
-      limit,
-      page,
-      year1,
-      month1,
-      year2,
-      month2,
-      date1,
-      date2,
-      (err, results) => {
-        if (!err) {
-          return standardResponse(
-            res,
-            200,
-            true,
-            "Results daily reports",
-            results
-          );
-        } else {
-          return standardResponse(res, 400, false, "An error occured Test");
-        }
+    if (
+      req.query.year1 === "" &&
+      req.query.year2 === "" &&
+      req.query.month1 === "" &&
+      req.query.month2 === "" &&
+      req.query.date1 === "" &&
+      req.query.date2 === ""
+    ) {
+      if (
+        req.query.year !== undefined &&
+        req.query.month !== undefined &&
+        req.query.date !== undefined
+      ) {
+        const { year, month, date } = req.query;
+        getDailyByQuery(limit, page, year, month, date, (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured");
+          }
+        });
+      } else if (req.query.year !== undefined) {
+        const year = req.query.year;
+        getDailyByYear(limit, page, year, (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured");
+          }
+        });
+      } else if (req.query.month !== undefined) {
+        const month = req.query.month;
+        getDailyByMonth(limit, page, month, (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured");
+          }
+        });
+      } else if (req.query.date !== undefined) {
+        const date = req.query.date;
+        getDailyByDate(limit, page, date, (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured");
+          }
+        });
+      } else {
+        let newDate = new Date();
+        let autoMonth =
+          newDate.getMonth() + 1 < 10
+            ? `0${newDate.getMonth() + 1}`
+            : `${newDate.getMonth() + 1}`;
+        let autoDate =
+          newDate.getDate() < 10
+            ? `0${newDate.getDate()}`
+            : `${newDate.getDate()}`;
+        const year = `${newDate.getFullYear()}`;
+        const month = autoMonth;
+        const date = autoDate;
+
+        getDailyByQuery(limit, page, year, month, date, (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured");
+          }
+        });
       }
-    );
+    } else {
+      const { year1, year2, month1, month2, date1, date2 } = req.query;
+      getDailyByDateRange(
+        limit,
+        page,
+        year1,
+        month1,
+        year2,
+        month2,
+        date1,
+        date2,
+        (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured Test");
+          }
+        }
+      );
+    }
   } else {
-    console.log(req.query, "bawah");
     if (
       req.query.year !== undefined &&
       req.query.month !== undefined &&
