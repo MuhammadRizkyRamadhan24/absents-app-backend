@@ -26,7 +26,6 @@ exports.getDailyByQuery = (req, res) => {
     req.query.date1 !== undefined &&
     req.query.date2 !== undefined
   ) {
-    console.log(req.query, "atas");
     if (
       req.query.year1 === "" &&
       req.query.year2 === "" &&
@@ -41,6 +40,37 @@ exports.getDailyByQuery = (req, res) => {
         req.query.date !== undefined
       ) {
         const { year, month, date } = req.query;
+        getDailyByQuery(limit, page, year, month, date, (err, results) => {
+          if (!err) {
+            return standardResponse(
+              res,
+              200,
+              true,
+              "Results daily reports",
+              results
+            );
+          } else {
+            return standardResponse(res, 400, false, "An error occured");
+          }
+        });
+      } else if (
+        req.query.year === "" &&
+        req.query.month === "" &&
+        req.query.date === ""
+      ) {
+        let newDate = new Date();
+        let autoMonth =
+          newDate.getMonth() + 1 < 10
+            ? `0${newDate.getMonth() + 1}`
+            : `${newDate.getMonth() + 1}`;
+        let autoDate =
+          newDate.getDate() < 10
+            ? `0${newDate.getDate()}`
+            : `${newDate.getDate()}`;
+        const year = `${newDate.getFullYear()}`;
+        const month = autoMonth;
+        const date = autoDate;
+
         getDailyByQuery(limit, page, year, month, date, (err, results) => {
           if (!err) {
             return standardResponse(
@@ -148,7 +178,7 @@ exports.getDailyByQuery = (req, res) => {
               results
             );
           } else {
-            return standardResponse(res, 400, false, "An error occured Test");
+            return standardResponse(res, 400, false, "An error occured");
           }
         }
       );
