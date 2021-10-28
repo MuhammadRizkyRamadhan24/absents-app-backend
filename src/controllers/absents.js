@@ -275,7 +275,6 @@ exports.inputAbsent = (req, res) => {
   let id = req.authUser.id;
   if (type === "masuk") {
     let date = new Date();
-    let newDate = date.toLocaleString("en-GB");
     let autoMonth =
       date.getMonth() + 1 < 10
         ? `0${date.getMonth() + 1}`
@@ -283,11 +282,11 @@ exports.inputAbsent = (req, res) => {
     let autoDate =
       date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
 
-    let masuk1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`;
+    let masuk1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     console.log(masuk1);
-    let masuk2 = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
-    let absen = new Date(`${masuk1}`);
-    let jadwal = new Date(`${masuk2} 08:00:00`);
+    let masuk2 = `${date.getFullYear()}-${autoMonth}-${autoDate}`
+    let absen = new Date(`28/10/2021, 14:27:03`);
+    let jadwal = new Date(`28/10/2021, 08:00:00`);
     let diffMs = jadwal - absen;
     let diffDays = Math.floor(diffMs / 86400000);
     let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
