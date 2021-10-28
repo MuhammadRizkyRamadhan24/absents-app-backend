@@ -290,7 +290,7 @@ exports.inputAbsent = (req, res) => {
     console.log(diffHrs);
     let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
     if (diffHrs < 0) {
-      const late = `Terlambat ${Math.abs(diffHrs)} jam, ${Math.abs(
+      const late = `Terlambat ${Math.abs(diffHrs) - 1} jam, ${Math.abs(
         diffMins
       )} menit`;
       console.log(id, type, late);
