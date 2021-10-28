@@ -283,9 +283,10 @@ exports.inputAbsent = (req, res) => {
       date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
     let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
     let absen = new Date();
-    let jadwal = new Date(`${masuk} 15:00:00`);
+    let jadwal = new Date(`${masuk} 08:00:00`);
     let diffMs = jadwal - absen;
     let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+    console.log(diffHrs);
     let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
     if (diffHrs < 0) {
       const late = `Terlambat ${Math.abs(diffHrs)} jam, ${Math.abs(
