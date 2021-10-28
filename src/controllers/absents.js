@@ -272,7 +272,6 @@ exports.deleteAbsent = (req, res) => {
 
 exports.inputAbsent = (req, res) => {
   let { type } = req.query;
-  let body = req.body;
   let id = req.authUser.id;
   if (type === "masuk") {
     let date = new Date();
@@ -282,6 +281,7 @@ exports.inputAbsent = (req, res) => {
         : `${date.getMonth() + 1}`;
     let autoDate =
       date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    console.log(masuk);
     let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
     let absen = new Date();
     let jadwal = new Date(`${masuk} 08:00:00`);
