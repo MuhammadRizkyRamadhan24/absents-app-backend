@@ -166,3 +166,13 @@ exports.inputAbsent = (id, type, late, cb) => {
     cb
   );
 };
+
+exports.inputAbsentPulang = (id, type, late, absent, cb) => {
+  db.query(
+    `
+    INSERT INTO absents(id_user, type, late, absent) VALUES (?,?,?,?)
+      `,
+    [id, type, late, absent],
+    cb
+  );
+};

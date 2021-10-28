@@ -11,6 +11,7 @@ const {
   getAbsentByDateRangeFromId,
   deleteAbsent,
   inputAbsent,
+  inputAbsentPulang,
 } = require("../models/absents");
 const { response: standardResponse } = require("../helpers/standardResponse");
 
@@ -313,8 +314,17 @@ exports.inputAbsent = (req, res) => {
       });
     }
   } else if (type === "pulang") {
+    let date = new Date();
+    let autoMonth =
+      date.getMonth() + 1 < 10
+        ? `0${date.getMonth() + 1}`
+        : `${date.getMonth() + 1}`;
+    let autoDate =
+      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    let pulang = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
+    const absent = `${pulang} 16:00:00`
     const late = "-";
-    inputAbsent(id, type, late, (err, results) => {
+    inputAbsentPulang(id, type, late, absent, (err, results) => {
       if (!err) {
         return standardResponse(res, 200, true, "Success Input Absent");
       } else {
