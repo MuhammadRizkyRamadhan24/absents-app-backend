@@ -214,7 +214,8 @@ exports.getAbsentByQueryFromId = (req, res) => {
             date.getSeconds() < 10
               ? `0${date.getSeconds()}`
               : `${date.getSeconds()}`;
-          results.absent = `${date.getFullYear()}-${autoMonth}-${autoDate} ${autoHours}:${autoMinutes}:${autoSeconds}`;
+          const date = `${date.getFullYear()}-${autoMonth}-${autoDate} ${autoHours}:${autoMinutes}:${autoSeconds}`;
+          console.log(date);
           return standardResponse(
             res,
             200,
