@@ -288,6 +288,7 @@ exports.inputAbsent = (req, res) => {
     let absen = new Date(`28/10/2021, 14:27:03`);
     let jadwal = new Date(`28/10/2021, 08:00:00`);
     let diffMs = jadwal - absen;
+    console.log(diffMs);
     let diffDays = Math.floor(diffMs / 86400000);
     let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
     let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
