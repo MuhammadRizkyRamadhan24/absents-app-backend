@@ -290,36 +290,35 @@ exports.inputAbsent = (req, res) => {
       date.getSeconds() < 10 ? `0${date.getSeconds()}` : `${date.getSeconds()}`;
     let absen1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${autoHours}:${autoMinutes}:${autoSeconds}`;
     let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
-    console.log(absen1);
-    // let absen = new Date(`${absen1}`);
-    // let jadwal = new Date(`${masuk} 08:00:00`);
-    // let diffMs = jadwal - absen;
-    // let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
-    // console.log(diffHrs);
-    // let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
-    // if (diffHrs < 0) {
-    //   const late = `Terlambat ${Math.abs(diffHrs) - 1} jam, ${Math.abs(
-    //     diffMins
-    //   )} menit`;
-    //   console.log(id, type, late);
-    //   inputAbsent(id, type, late, (err, results) => {
-    //     if (!err) {
-    //       return standardResponse(res, 200, true, "Success Input Absent");
-    //     } else {
-    //       return standardResponse(res, 400, false, "An error occured");
-    //     }
-    //   });
-    // } else if (diffHrs >= 0) {
-    //   const late = "Tepat waktu";
-    //   console.log(id, type, late);
-    //   inputAbsent(id, type, late, (err, results) => {
-    //     if (!err) {
-    //       return standardResponse(res, 200, true, "Success Input Absent");
-    //     } else {
-    //       return standardResponse(res, 400, false, "An error occured");
-    //     }
-    //   });
-    // }
+    let absen = new Date(`${absen1}`);
+    let jadwal = new Date(`${masuk} 08:00:00`);
+    let diffMs = jadwal - absen;
+    let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+    console.log(diffHrs);
+    let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+    if (diffHrs < 0) {
+      const late = `Terlambat ${Math.abs(diffHrs) - 1} jam, ${Math.abs(
+        diffMins
+      )} menit`;
+      console.log(id, type, late);
+      inputAbsent(id, type, late, (err, results) => {
+        if (!err) {
+          return standardResponse(res, 200, true, "Success Input Absent");
+        } else {
+          return standardResponse(res, 400, false, "An error occured");
+        }
+      });
+    } else if (diffHrs >= 0) {
+      const late = "Tepat waktu";
+      console.log(id, type, late);
+      inputAbsent(id, type, late, (err, results) => {
+        if (!err) {
+          return standardResponse(res, 200, true, "Success Input Absent");
+        } else {
+          return standardResponse(res, 400, false, "An error occured");
+        }
+      });
+    }
   } else if (type === "pulang") {
     let date = new Date(`${req.body.date}`);
     let autoMonth =
