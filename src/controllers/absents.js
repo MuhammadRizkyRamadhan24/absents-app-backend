@@ -10,7 +10,7 @@ const {
   getAbsentByDateFromId,
   getAbsentByDateRangeFromId,
   deleteAbsent,
-  inputAbsent,
+  inputAbsentMasuk,
   inputAbsentPulang,
 } = require("../models/absents");
 const { response: standardResponse } = require("../helpers/standardResponse");
@@ -297,11 +297,10 @@ exports.inputAbsent = (req, res) => {
     console.log(diffHrs);
     let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
     if (diffHrs < 0) {
-      const late = `Terlambat ${Math.abs(diffHrs) - 1} jam, ${Math.abs(
+      const late = `Terlambat ${Math.abs(diffHrs)} jam, ${Math.abs(
         diffMins
       )} menit`;
-      console.log(id, type, late);
-      inputAbsent(id, type, late, (err, results) => {
+      inputAbsentMasuk(id, type, late, req.body.date, (err, results) => {
         if (!err) {
           return standardResponse(res, 200, true, "Success Input Absent");
         } else {

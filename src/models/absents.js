@@ -157,12 +157,12 @@ exports.deleteAbsent = (id, cb) => {
   );
 };
 
-exports.inputAbsent = (id, type, late, cb) => {
+exports.inputAbsentMasuk = (id, type, late, absent, cb) => {
   db.query(
     `
-    INSERT INTO absents(id_user, type, late) VALUES (?,?,?)
+    INSERT INTO absents(id_user, type, late, absent) VALUES (?,?,?,?)
       `,
-    [id, type, late],
+    [id, type, late, absent],
     cb
   );
 };
