@@ -282,9 +282,8 @@ exports.inputAbsent = (req, res) => {
     let autoDate =
       date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
     let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
-    console.log(masuk);
     let absen = new Date();
-    let jadwal = new Date(`${masuk} 08:00:00`);
+    let jadwal = new Date(`${masuk} 15:00:00`);
     let diffMs = jadwal - absen;
     let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
     let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
