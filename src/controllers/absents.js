@@ -275,44 +275,45 @@ exports.inputAbsent = (req, res) => {
   let { type } = req.query;
   let id = req.authUser.id;
   if (type === "masuk") {
-    let date = new Date(`${req.body.date}`);
-    let autoMonth =
-      date.getMonth() + 1 < 10
-        ? `0${date.getMonth() + 1}`
-        : `${date.getMonth() + 1}`;
-    let autoDate =
-      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    let absen1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
-    let absen = new Date(`${absen1}`);
-    let jadwal = new Date(`${masuk} 08:00:00`);
-    let diffMs = jadwal - absen;
-    let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
-    console.log(diffHrs);
-    let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
-    if (diffHrs < 0) {
-      const late = `Terlambat ${Math.abs(diffHrs) - 1} jam, ${Math.abs(
-        diffMins
-      )} menit`;
-      console.log(id, type, late);
-      inputAbsent(id, type, late, (err, results) => {
-        if (!err) {
-          return standardResponse(res, 200, true, "Success Input Absent");
-        } else {
-          return standardResponse(res, 400, false, "An error occured");
-        }
-      });
-    } else if (diffHrs >= 0) {
-      const late = "Tepat waktu";
-      console.log(id, type, late);
-      inputAbsent(id, type, late, (err, results) => {
-        if (!err) {
-          return standardResponse(res, 200, true, "Success Input Absent");
-        } else {
-          return standardResponse(res, 400, false, "An error occured");
-        }
-      });
-    }
+    console.log(req.body);
+    // let date = new Date(`${req.body.date}`);
+    // let autoMonth =
+    //   date.getMonth() + 1 < 10
+    //     ? `0${date.getMonth() + 1}`
+    //     : `${date.getMonth() + 1}`;
+    // let autoDate =
+    //   date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    // let absen1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    // let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
+    // let absen = new Date(`${absen1}`);
+    // let jadwal = new Date(`${masuk} 08:00:00`);
+    // let diffMs = jadwal - absen;
+    // let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+    // console.log(diffHrs);
+    // let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+    // if (diffHrs < 0) {
+    //   const late = `Terlambat ${Math.abs(diffHrs) - 1} jam, ${Math.abs(
+    //     diffMins
+    //   )} menit`;
+    //   console.log(id, type, late);
+    //   inputAbsent(id, type, late, (err, results) => {
+    //     if (!err) {
+    //       return standardResponse(res, 200, true, "Success Input Absent");
+    //     } else {
+    //       return standardResponse(res, 400, false, "An error occured");
+    //     }
+    //   });
+    // } else if (diffHrs >= 0) {
+    //   const late = "Tepat waktu";
+    //   console.log(id, type, late);
+    //   inputAbsent(id, type, late, (err, results) => {
+    //     if (!err) {
+    //       return standardResponse(res, 200, true, "Success Input Absent");
+    //     } else {
+    //       return standardResponse(res, 400, false, "An error occured");
+    //     }
+    //   });
+    // }
   } else if (type === "pulang") {
     let date = new Date(`${req.body.date}`);
     let autoMonth =
