@@ -275,7 +275,9 @@ exports.inputAbsent = (req, res) => {
   let id = req.authUser.id;
   if (type === "masuk") {
     let date = new Date();
-    console.log(date.toLocaleString('en-GB'), 'hehe');
+    console.log(
+      date.toLocaleString('en-US', { hour: 'numeric', hour12: true }), 'hehe'
+    ); 
     let autoMonth =
       date.getMonth() + 1 < 10
         ? `0${date.getMonth() + 1}`
