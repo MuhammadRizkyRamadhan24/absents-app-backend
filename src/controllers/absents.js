@@ -282,7 +282,13 @@ exports.inputAbsent = (req, res) => {
         : `${date.getMonth() + 1}`;
     let autoDate =
       date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    let absen1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    let autoHours =
+      date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+    let autoMinutes =
+      date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+    let autoSeconds =
+      date.getSeconds() < 10 ? `0${date.getSeconds()}` : `${date.getSeconds()}`;
+    let absen1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${autoHours}:${autoMinutes}:${autoSeconds}`;
     let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
     console.log(absen1);
     // let absen = new Date(`${absen1}`);
@@ -323,7 +329,7 @@ exports.inputAbsent = (req, res) => {
     let autoDate =
       date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
     let pulang = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
-    const absent = `${pulang} 16:00:00`
+    const absent = `${pulang} 16:00:00`;
     const late = "-";
     inputAbsentPulang(id, type, late, absent, (err, results) => {
       if (!err) {
