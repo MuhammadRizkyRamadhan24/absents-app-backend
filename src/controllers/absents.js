@@ -275,16 +275,16 @@ exports.inputAbsent = (req, res) => {
   let { type } = req.query;
   let id = req.authUser.id;
   if (type === "masuk") {
-    console.log(req.body);
-    // let date = new Date(`${req.body.date}`);
-    // let autoMonth =
-    //   date.getMonth() + 1 < 10
-    //     ? `0${date.getMonth() + 1}`
-    //     : `${date.getMonth() + 1}`;
-    // let autoDate =
-    //   date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    // let absen1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    // let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
+    let date = new Date(`${req.body.date}`);
+    let autoMonth =
+      date.getMonth() + 1 < 10
+        ? `0${date.getMonth() + 1}`
+        : `${date.getMonth() + 1}`;
+    let autoDate =
+      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    let absen1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    let masuk = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
+    console.log(absen1);
     // let absen = new Date(`${absen1}`);
     // let jadwal = new Date(`${masuk} 08:00:00`);
     // let diffMs = jadwal - absen;
