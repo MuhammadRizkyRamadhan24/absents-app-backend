@@ -194,28 +194,6 @@ exports.getAbsentByQueryFromId = (req, res) => {
       const month = req.query.month;
       getAbsentByMonthFromId(id, limit, page, month, (err, results) => {
         if (!err) {
-          const date = new Date(`${results.absent}`);
-          console.log(
-            date.toLocaleString("en-US", { hour: "numeric", hour12: true })
-          );
-          const autoMonth =
-            date.getMonth() + 1 < 10
-              ? `0${date.getMonth() + 1}`
-              : `${date.getMonth() + 1}`;
-          const autoDate =
-            date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-          const autoHours =
-            date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
-          const autoMinutes =
-            date.getMinutes() < 10
-              ? `0${date.getMinutes()}`
-              : `${date.getMinutes()}`;
-          const autoSeconds =
-            date.getSeconds() < 10
-              ? `0${date.getSeconds()}`
-              : `${date.getSeconds()}`;
-          const date1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${autoHours}:${autoMinutes}:${autoSeconds}`;
-          console.log(date1);
           return standardResponse(
             res,
             200,
@@ -319,9 +297,10 @@ exports.inputAbsent = (req, res) => {
     console.log(diffHrs);
     let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
     if (diffHrs < 0) {
-      const hrs =
-        Math.abs(diffMins) === 0 ? Math.abs(diffHrs) : Math.abs(diffHrs) - 1;
-      const late = `Terlambat ${hrs} jam, ${Math.abs(diffMins)} menit`;
+      const hrs = Math.abs(diffMins) === 0 ? Math.abs(diffHrs) : Math.abs(diffHrs) - 1 
+      const late = `Terlambat ${hrs} jam, ${Math.abs(
+        diffMins
+      )} menit`;
       inputAbsentMasuk(id, type, late, req.body.date, (err, results) => {
         if (!err) {
           return standardResponse(res, 200, true, "Success Input Absent");
