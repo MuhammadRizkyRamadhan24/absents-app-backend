@@ -275,7 +275,7 @@ exports.inputAbsent = (req, res) => {
   let id = req.authUser.id;
   if (type === "masuk") {
     let date = new Date();
-    console.log(date.toLocaleString("en-GB"));
+    let newDate = date.toLocaleString("en-GB");
     let autoMonth =
       date.getMonth() + 1 < 10
         ? `0${date.getMonth() + 1}`
@@ -283,7 +283,7 @@ exports.inputAbsent = (req, res) => {
     let autoDate =
       date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
 
-    let masuk1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    let masuk1 = `${date.getFullYear()}-${autoMonth}-${autoDate} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`;
     console.log(masuk1);
     let masuk2 = `${date.getFullYear()}-${autoMonth}-${autoDate}`;
     let absen = new Date(`${masuk1}`);
